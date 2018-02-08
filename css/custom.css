@@ -1,0 +1,23 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+nav { 
+    background-color: #4285f4;
+    margin: 0;
+    padding: 0;
+}
+
+form {
+    padding: 8px 4px 8px 4px;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+form, a {
+    display: inline-block;
+}
