@@ -24,8 +24,35 @@ class UI {
         this .api .obtenerDatos() 
             .then( datos => { 
                 const resultados = datos .respuesta .results;
-                console .log( resultados );
+                
+                // Muestra los pines en Google Maps
+                this .mostrarPinesEnElMapa( resultados );
             });
+    }
+
+    /* Método para mostrar los pines en Google Maps */
+    mostrarPinesEnElMapa( datos ) {
+        console .log( 'Pines', datos );
+
+        // Recorrer 'Array' de establecimientos
+        datos .forEach( dato => {
+            console .log( dato );
+            // Extraemos los datos que nos interesa usando Destructuring
+            let { latitude, longitude, calle, regular, premium } = dato;
+
+            // Crea Objeto ubicación (Latitud y Longitud)
+            let latLng = {
+                lat: Number( latitude ),
+                lng: Number( longitude )
+            }
+
+            // Agrega los Pines a Google Maps
+            let marker = new google .maps .Marker({
+                position: latLng,
+                map: this .map
+            });
+
+        });
     }
         
 }
