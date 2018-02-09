@@ -32,6 +32,8 @@ class UI {
 
     /* Método para mostrar los pines en Google Maps */
     mostrarPinesEnElMapa( datos ) {
+        let infoWindowActivo;           // Para controlar la visualización del infoWindow en el Mapa
+
         console .log( 'Pines', datos );
 
         // Recorrer 'Array' de establecimientos
@@ -52,7 +54,41 @@ class UI {
                 map: this .map
             });
 
+            // Crea infoWindow para el Pin
+            let infoWindow = this .crearInfoWindow( calle, regular, premium );
+
+            // Evento 'click' para mostrar InfoWindow al hacer click
+            // Google usa 'addListener' a cambio de 'addEventListener'
+            marker .addListener( 'click', () => {
+
+                // Valida que si existe el infoWindowActivo (Desplegado en el Mapa) se cierre 
+                if( infoWindowActivo ) {
+                    infoWindowActivo .close();
+                }
+                
+                infoWindow .open( this .map, marker );          // Muestra infoWindow
+                infoWindowActivo = infoWindow;                  // Asignamos el infoWindow
+            });
+
         });
     }
-        
+
+    /* Método para crear el infoWindow (Globo mensaje sobre el Pin en el Mapa de Google Maps) */
+    crearInfoWindow( calle, regular, premium ) {
+        // Crea un template para los datos que se desean desplegar en el InfoWindow del Marker
+        let infoMarker = `
+            <p>
+                <b>Domicilio:</b> ${ calle }<br />
+                <b>Precio Regular:</b>$${ regular }<br />
+                <b>Precio Premium:</b>$${ premium }<br />
+            </p>
+        `;
+
+        // Crea infoWindow 
+        let infoWindow = new google .maps .InfoWindow({
+            content: infoMarker
+        });
+
+        return infoWindow;          
+    }
 }
