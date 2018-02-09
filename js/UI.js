@@ -7,6 +7,13 @@ class UI {
         // Instancia la API
         this .api = new API();
 
+        // Inicializar el Mapa
+        this .inicializarMapa();
+    }
+
+    /* Método para Inicializar Mapa */
+    inicializarMapa() {
+
         let latLng = { lat: 19.390519, lng: -99.3739778 }
 
         // Instancia y obtiene propiedad del mapa (Google Maps API)
@@ -107,9 +114,12 @@ class UI {
     filtrarSugerencias( busqueda, resultados ) {
         
         // Filtra los datos usando el método 'filter' y un CallBack
-        const datoFiltrado = resultados .filter( dato => dato .calle .indexOf( busqueda ) !== -1 );     // 'indexOf' determinará si la búsqueda se encuentra en la cadena del resultado
+        const datosFiltrados = resultados .filter( dato => dato .calle .indexOf( busqueda ) !== -1 );     // 'indexOf' determinará si la búsqueda se encuentra en la cadena del resultado
 
-        console .log( 'datoFiltrado ', datoFiltrado )
+        console .log( 'datosFiltrados ', datosFiltrados );
+
+        this .inicializarMapa();                        // Inicializa el mapa
+        this .mostrarPinesEnElMapa( datosFiltrados );   // Mostrar los pines filtrados
     }
 
 }

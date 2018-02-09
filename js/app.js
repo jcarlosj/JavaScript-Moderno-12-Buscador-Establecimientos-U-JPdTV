@@ -18,7 +18,9 @@ buscador .addEventListener( 'input', () => {
         // Obtener sugerencias que sean parte de la búsqueda
         ui .obtenerSugerencias( buscador .value );
     }
-    else {
+    else if( buscador .value .length === 0 ) {
         console .log( 'Todavía no...' );
+        ui .inicializarMapa();              // Reiniciar el Mapa
+        ui .mostrarEstablecimientos();      // Mostrar todos los pines
     }
 });
