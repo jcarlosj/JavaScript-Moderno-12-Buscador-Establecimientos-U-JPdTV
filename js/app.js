@@ -15,7 +15,8 @@ buscador .addEventListener( 'input', () => {
 
     // Valida que al menos existan más de 3 caracteres para realizar la búsqueda
     if( buscador .value .length > 3 ) {
-        console .log( 'Iniciar la búsqueda' );
+        // Obtener sugerencias que sean parte de la búsqueda
+        ui .obtenerSugerencias( buscador .value );
     }
     else {
         console .log( 'Todavía no...' );

@@ -91,4 +91,25 @@ class UI {
 
         return infoWindow;          
     }
+
+    /* Método que mediante la 'búsqueda' obtiene sugerencias para la búsqueda */
+    obtenerSugerencias( busqueda ) {
+        this .api .obtenerDatos()
+            .then( datos => {
+                const resultados = datos .respuesta .results;
+
+                // Enviar el JSON y la búsqueda al filtro
+                this .filtrarSugerencias( busqueda, resultados );
+            });
+    }
+
+    /* Método para filtrar las sugerencias de búsqueda */
+    filtrarSugerencias( busqueda, resultados ) {
+        
+        // Filtra los datos usando el método 'filter' y un CallBack
+        const datoFiltrado = resultados .filter( dato => dato .calle .indexOf( busqueda ) !== -1 );     // 'indexOf' determinará si la búsqueda se encuentra en la cadena del resultado
+
+        console .log( 'datoFiltrado ', datoFiltrado )
+    }
+
 }
